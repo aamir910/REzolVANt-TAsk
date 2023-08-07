@@ -1,6 +1,9 @@
 
 import { useState } from 'react';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { faPlus ,   faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 const [value , setvalue] = useState('')
@@ -10,6 +13,8 @@ const [value2 , setvalue2] = useState([])
 const [ toglebtn , settoglebtn] = useState(true)
 
 const [edititem , setedititem ] = useState(null) 
+
+// const [status , setstatus ] = useState("TO-DO") 
  
     function  handlechange(event)
   {
@@ -43,7 +48,7 @@ const [edititem , setedititem ] = useState(null)
    }
 else
 {
-  const inputdata = {id: new Date().getTime().toString() , name:value }
+  const inputdata = {id: new Date().getTime().toString() , name:value , status:"TO-DO" }
   setvalue2([ inputdata , ...value2  ])
   setvalue("")
 
@@ -79,6 +84,24 @@ else
 
 
   }
+  function  handlestatus(index)
+  {
+    let updateitem =  value2.find((elem)=> 
+    {
+       return  elem.id === index
+    })
+
+  if(updateitem.status === "TO-DO")
+   {
+     updateitem.status = "IN_PROCESS"
+  }
+  else if (updateitem.status === "IN_PROCESS") {
+    updateitem.status = "COMPLETED"
+  }
+  else {
+    updateitem.status = "TO-DO"
+  }
+}
   return (
     <div className="App">
       <>
@@ -92,7 +115,7 @@ else
                />
 
             {
-              toglebtn ? <button onClick={addtaskbutton} className='btn'>Add task </button> :<button className='btn' onClick={addtaskbutton}>edit </button>
+              toglebtn ? <button onClick={addtaskbutton} className='btn taskbtn'>      <FontAwesomeIcon icon={faPlus} />              </button> :<button className='btn taskbtn' onClick={addtaskbutton}><FontAwesomeIcon icon={faEdit} /> </button>
             }   
                
          
@@ -105,9 +128,24 @@ else
                { return(
                   <div className='itemsinlist'>
                   
-                  <li key={items.id} >   {items.name}</li>
-                  <button onClick={() => handleremove(items.id)}  className='btn'>remove</button>
-                  <button onClick={()=>handleedit(items.id)} className='btn'>edit</button>
+                  <li key={items.id}  className='fulltask'> 
+                    <div className="task">
+                 {items.name}
+                     </div>
+
+                  <button className='btn todobtn' onClick={()=>handlestatus(items.id)}> {items.status}</button>
+
+                  <div className="editdelete">
+
+                  <button onClick={() => handleremove(items.id)}  className='btn' >
+                  <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                  <button onClick={()=>handleedit(items.id)} className='btn'>
+                  <FontAwesomeIcon icon={faEdit} />
+
+                   </button>
+                  </div>
+                   </li>
                   </div>  
                     
                 )} )
