@@ -37,13 +37,13 @@ const Todo = () => {
       settoglebtn(true);
     } else {
 
-    setstatus("TO-DO") ; 
+    // setstatus("TO-DO") ; 
 
 
       const inputdata = {
         id: new Date().getTime().toString(),
         name: value,
-        status: status,
+        status:  "TO-DO",
       };
       setvalue2([inputdata, ...value2]);
       setvalue("");
@@ -128,15 +128,15 @@ const Todo = () => {
                     <div className="editdelete">
                       <button
                         onClick={() => handleremove(items.id)}
-                        className="btn"
+                        className="btn "
                       >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <FontAwesomeIcon icon={faTrash} className="dtebtn" />
                       </button>
                       <button
                         onClick={() => handleedit(items.id)}
                         className="btn"
                       >
-                        <FontAwesomeIcon icon={faEdit} />
+                        <FontAwesomeIcon icon={faEdit} className="editbtn"  />
                       </button>
                     </div>
                   </li>
