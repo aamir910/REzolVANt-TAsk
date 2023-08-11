@@ -1,41 +1,42 @@
 import React from 'react'
 import './apiTask.css'
 import { useEffect ,useState } from 'react';
-import mobileimg from './mobilejpeg.jpeg'
+import mobileimg from './mobilejpeg.jpeg' ; 
+import axios from 'axios'
 const ApiTask = () => {
-
+  const API ='https://raw.githubusercontent.com/marcoroganovic/shopping-cart/master/js/data.json'
     const [jsonData, setJsonData] = useState([]);
-    useEffect(() => {
-      async function fetchData() {
-        try {
-          const response = await fetch('https://raw.githubusercontent.com/marcoroganovic/shopping-cart/master/js/data.json');
-          const data = await response.json();
-          setJsonData(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+    async function fetchData() {
+      try {
+        const response = await axios.get(API);
+        // const data = await response.json();
+        setJsonData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-  
+    }
+    useEffect(() => {
+      
       fetchData();
     }, []);
-
-console.log(jsonData)
+    
+    console.log(jsonData)
   return (
     <div className='box'>
       {jsonData.map((dat)=> 
       {
         return(<>
-    <div className="carts">
+    <div className="carts" key={dat.id}>
         
-          <h1 > ProductId:{dat.id}</h1>
+          <h1 > Id:{dat.id+1}</h1>
          
          <div className='discription'>
 
           <img src={mobileimg} alt="no img"  />
-          <p className='des'>
+          <div className='des'>
             <h5>Description</h5>
-            {dat.description}
-          </p>
+            {dat.description}   
+          </div>
          </div>
           <p>
            Price:{dat.price}

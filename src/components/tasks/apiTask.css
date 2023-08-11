@@ -1,10 +1,12 @@
 .box
 {
     padding: 0;
-margin: 2rem;
+margin: 1rem;
 background: rgb(226, 237, 226);
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
+display: flex;
+flex-flow: row wrap;
+flex-wrap: wrap;
+/* grid-template-columns: 1fr 1fr 1fr  ; */
 width: 100%;
 }
 .carts{
@@ -12,11 +14,14 @@ margin: 2rem;
 padding: 2rem;
 background-color: white;
 border-radius: 2rem;
+width: 350px;
 box-shadow: 2rem;
+/* width: 100%; */
 }
 .discription{
 
     display: flex;
+
     margin: 1rem;
 
 }
@@ -24,6 +29,7 @@ box-shadow: 2rem;
 {
     padding: 0;
     margin: 0;
+    width: 200px;
 }
 img
 {
