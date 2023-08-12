@@ -4,6 +4,19 @@ import { useEffect ,useState } from 'react';
 import mobileimg from './mobilejpeg.jpeg' ; 
 import axios from 'axios'
 const ApiTask = () => {
+
+  
+    
+
+
+
+
+
+
+
+
+
+
   const API ='https://raw.githubusercontent.com/marcoroganovic/shopping-cart/master/js/data.json'
     const [jsonData, setJsonData] = useState([]);
     async function fetchData() {
