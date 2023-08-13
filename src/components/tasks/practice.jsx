@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 
 const Practice = () => {
 //   const [firstName, setFirstName] = useState('');
@@ -6,7 +6,7 @@ const Practice = () => {
   
   let obj = { fname : "123" , lname : "123"}
   const [object , setobject] = useState({ firstname : "" , lastname : ""})
-
+ const [count , setcount] = useState(0) ; 
   const handleFirstNameChange = (event) => {
     //   setFirstName( event.target.value);
       setobject({ ...object  , firstname : event.target.value } )
@@ -25,6 +25,19 @@ const Practice = () => {
         // setobject( { fname : firstName , lname : lastName} )
         // obj = { fname : firstName , lname : lastName}
     };
+    useEffect(() => {
+     
+      
+       console.log("aamir ")
+       document.title  = `you click ${count} the counter` 
+     
+   } , [count] )
+
+    const handlebtn = () =>{
+let a = count+1 ; 
+     setcount(a)
+    } ; 
+
     
   return (
     <div className="flex justify-center  flex-col items-center p-4">
@@ -55,18 +68,24 @@ const Practice = () => {
             placeholder="Enter your last name"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-        >
-          Submit
-        </button>
+      
       </form>
       <div className="display"> 
        first name : {object.firstname}  <br />
        lastname : {object.lastname}
 
+
+
+    {/* perform the useeffect hook there   */}
+      <button
+          className="w-full my-1 mpx-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+       onClick={(handlebtn)}     
+      >
+          COUNT : {count}   
+        </button>
       </div>
+    
+
     </div>
   );
 };
